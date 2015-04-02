@@ -1,5 +1,5 @@
 JournalApp.Views.PostForm = Backbone.View.extend({
-  template: JST['post_form'],
+  template: JST['posts/form'],
   tagName: 'form',
   events: {
     'submit': 'savePost'

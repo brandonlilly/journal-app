@@ -1,6 +1,6 @@
 JournalApp.Views.PostShow = Backbone.View.extend({
-  template: JST['post_show'],
-  errorTemplate: JST['errors'],
+  template: JST['posts/show'],
+
   events: {
     'dblclick .title h2': 'editTitle',
     'dblclick .postbody p': 'editBody',

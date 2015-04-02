@@ -1,8 +1,8 @@
 JournalApp.Routers.PostsRouter = Backbone.Router.extend({
   routes: {
-    '': 'postsIndex',
-    'posts/new': 'postNew',
-    'posts/:id': 'postShow'
+    '': 'new',
+    'posts/new': 'new',
+    'posts/:id': 'show'
   },
 
   initialize: function ($rootEl) {
@@ -12,23 +12,21 @@ JournalApp.Routers.PostsRouter = Backbone.Router.extend({
 
     this.posts = new JournalApp.Collections.Posts();
 
-    this._postsIndex = new JournalApp.Views.PostsIndex({ collection: this.posts });
+    var postsIndex = new JournalApp.Views.PostsIndex({ collection: this.posts });
     this.posts.fetch();
-    this.$sidebar.html(this._postsIndex.render().$el);
+    this.$sidebar.html(postsIndex.render().$el);
   },
 
-  postsIndex: function () {
-
-  },
-
-  postShow: function (id) {
+  show: function (id) {
     var post = this.posts.getOrFetch(id);
-    this._postShow = new JournalApp.Views.PostShow({ model: post, collection: this.posts });
-    post.fetch();
-    this.$content.html(this._postShow.render().$el);
+    var postShow = new JournalApp.Views.PostShow({
+      model: post,
+      collection: this.posts
+    });
+    this.$content.html(postShow.render().$el);
   },
 
-  postNew: function () {
+  new: function () {
     var post = new JournalApp.Models.Post();
     var postForm = new JournalApp.Views.PostForm({
       model: post,
